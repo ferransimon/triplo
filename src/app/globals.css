@@ -1,26 +1,46 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --font-sans: var(--font-fredoka), ui-rounded, "SF Pro Rounded", system-ui, sans-serif;
+
+  --color-cream: #fff8ef;
+  --color-board: #f1e6d8;
+  --color-slot: #faf2e7;
+  --color-ink: #3d3a4b;
+  --color-ink-soft: #8a8399;
+  --color-accent: #b9a7ff;
+  --color-accent-ink: #2f2a4a;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html,
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  touch-action: manipulation;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* pulsing outline on cells that would merge */
+@keyframes pulse-ring {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0.18rem rgb(61 58 75 / 0.55);
+  }
+  50% {
+    box-shadow: 0 0 0 0.3rem rgb(61 58 75 / 0.18);
   }
 }
+.will-merge {
+  animation: pulse-ring 0.9s ease-in-out infinite;
+}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@media (prefers-reduced-motion: reduce) {
+  .will-merge {
+    animation: none;
+    box-shadow: 0 0 0 0.2rem rgb(61 58 75 / 0.5);
+  }
 }
